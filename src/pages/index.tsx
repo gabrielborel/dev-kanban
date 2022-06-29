@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
+import { signIn, getSession } from 'next-auth/react';
 import { Icon } from '../components/AnimatedIcon';
 import { motion } from 'framer-motion';
 import { GithubLogo } from 'phosphor-react';
@@ -19,16 +20,17 @@ const Home: NextPage = () => {
         <Icon />
 
         <motion.button
+          onClick={() => signIn()}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 1.8 }}
+          transition={{ duration: 0.7, delay: 2 }}
           className='mt-8 text-gray-200 flex items-center gap-4 w-fit mx-auto text-lg border-2 p-4 rounded-3xl border-slate-800 hover:border-slate-600 transition-colors group'
         >
           <GithubLogo
             size={26}
             className='text-slate-600 group-hover:text-gray-200 transition-colors'
           />
-          Log in with GitHub
+          Log in with Github
         </motion.button>
       </div>
     </div>
@@ -36,3 +38,20 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
