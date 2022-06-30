@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         mont: 'Montserrat, sans-serif',
         tri: 'Trispace, sans-serif'
+      },
+      colors: {
+        'black-overlay': 'rgba(39, 39, 42, 0.7)'
       }
     },
   },

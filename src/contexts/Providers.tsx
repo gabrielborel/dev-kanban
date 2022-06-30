@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { BoardsProvider } from './BoardsContext';
 import { SidebarProvider } from './SidebarContext';
 
 interface IProviders {
@@ -6,5 +7,9 @@ interface IProviders {
 }
 
 export const Providers = ({ children }: IProviders) => {
-  return <SidebarProvider>{children}</SidebarProvider>;
+  return (
+    <BoardsProvider>
+      <SidebarProvider>{children}</SidebarProvider>
+    </BoardsProvider>
+  );
 };
