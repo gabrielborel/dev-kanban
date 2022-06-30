@@ -1,14 +1,25 @@
 import Link from 'next/link';
 import { Kanban, SquareHalf, EyeSlash, Eye } from 'phosphor-react';
+import cx from 'classnames';
+import React from 'react';
+import { useSidebar } from '../contexts/SidebarContext';
 
 export const Sidebar = () => {
   const boards = ['Platform Launch', 'Marketing Plan', 'Roadmap'];
+  const { isSidebarOpen, setSidebarStatus } = useSidebar();
 
-  return (
-    <aside className='hidden md:flex bg-zinc-800 w-[290px] h-full py-5 flex-col justify-between'>
+  return isSidebarOpen ? (
+    <aside
+      className={cx(
+        'md:flex bg-zinc-800 w-[290px] h-full py-5 flex-col justify-between pt-24 md:pt-5',
+        {
+          flex: isSidebarOpen,
+        }
+      )}
+    >
       <div>
-        <h1 className='flex items-center font-semibold gap-1 text-2xl mb-10 pl-5 text-zinc-100'>
-          <Kanban size={32} className='text-indigo-900' /> dev-kanban
+        <h1 className='hidden md:flex items-center font-semibold gap-1 text-2xl mb-10 pl-5 text-zinc-100'>
+          <Kanban size={32} className='text-indigo-500' /> dev-kanban
         </h1>
 
         <div>
@@ -38,11 +49,30 @@ export const Sidebar = () => {
           Light Mode
         </button>
 
-        <button className='pl-5 text-zinc-400 flex items-center gap-2'>
+        <button
+          className='pl-5 text-zinc-400 flex items-center gap-2'
+          onClick={() => setSidebarStatus(false)}
+        >
           <EyeSlash />
           Hide Sidebar
         </button>
       </div>
+    </aside>
+  ) : (
+    <aside
+      className={cx('hidden bg-zinc-800 md:flex flex-col justify-between', {
+        hidden: isSidebarOpen,
+      })}
+    >
+      <Kanban size={32} className='text-indigo-500 mx-auto mt-5 mb-auto' />
+
+      <button
+        className='flex items-center gap-1 p-1 px-2 rounded-sm mx-2 mb-6 text-zinc-200 bg-zinc-900 hover:bg-zinc-700 transition-colors'
+        onClick={() => setSidebarStatus(true)}
+      >
+        <Eye />
+        Show
+      </button>
     </aside>
   );
 };
