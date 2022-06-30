@@ -4,12 +4,12 @@ const icon = {
   hidden: {
     opacity: 0,
     pathLength: 0,
-    fill: 'rgb(30 41 59)',
+    fill: '#71717a',
   },
   visible: {
     opacity: 1,
     pathLength: 1,
-    fill: '#0F172A',
+    fill: '#18181b',
   },
 };
 
@@ -18,14 +18,14 @@ export const Icon = () => (
     initial={{ y: 20, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ duration: 0.8 }}
-    className='w-[150px] h-[150px] mx-auto flex place-content-center overflow-hidden bg-slate-700 rounded-3xl'
+    className='w-[150px] h-[150px] mx-auto flex place-content-center overflow-hidden bg-zinc-600 rounded-3xl'
   >
     <motion.svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 100 100'
       strokeLinecap='round'
       strokeLinejoin='round'
-      className='w-[70%] overflow-visible stroke-slate-900 stroke-2'
+      className='w-[70%] overflow-visible stroke-zinc-800 stroke-2'
     >
       <motion.path
         d='M0 100V0l50 50 50-50v100L75 75l-25 25-25-25z'
